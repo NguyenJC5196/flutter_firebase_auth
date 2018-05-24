@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_authentication/pages/home.dart';
 import 'package:firebase_authentication/pages/login.dart';
 
 void main() => runApp(new MyApp());
@@ -32,7 +31,6 @@ class _MyHomePageState extends State<MyHomePage> {
       debugShowCheckedModeBanner: false,
       title: 'Firebase',
       routes: {
-        "home-page": (context) => MyHomePage(),
         "login-page": (context) => LoginPage(),
       },
       home: LoginPage(),

@@ -14,7 +14,7 @@ class FirebaseApi {
   static Future<FirebaseApi> signInWithGoogle() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+        await googleUser.authentication;
     final FirebaseUser user = await _auth.signInWithGoogle(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
@@ -26,7 +26,12 @@ class FirebaseApi {
 
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
-
+    print(user.displayName);
     return FirebaseApi(user);
+  }
+
+  static bool signOutGoogle() {
+    _googleSignIn.signOut();
+    return true;
   }
 }

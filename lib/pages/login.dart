@@ -3,11 +3,10 @@ import 'package:firebase_authentication/api.dart';
 
 import 'dart:async';
 
-
 class LoginPage extends StatelessWidget {
   Future<bool> _loginUser() async {
-    final api = await FirebaseApi.signInWithGoogle();
-    if (api != null) {
+    final user = await FirebaseApi.signInWithGoogle();
+    if (user != null) {
       return true;
     } else {
       return false;
@@ -16,44 +15,42 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    @override
-    Widget build(BuildContext context) {
-      return  Scaffold(
-        appBar: AppBar(
-          title: Text('App Name'),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("Firebase Demo"),
+      ),
+      body: new Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            new RaisedButton(
+              onPressed: () => _handleSignIn(),
+              child: new Text("Sign In"),
+              color: Colors.green,
+            ),
+            new Padding(
+              padding: const EdgeInsets.all(10.0),
+            ),
+            new RaisedButton(
+              onPressed: _handleSignOut,
+              child: new Text("Sign out"),
+              color: Colors.red,
+            ),
+          ],
         ),
-        body: Center(
-          child:
-           Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                 Container(
-                   height: 100.0,
-               width:100.0,
-                  child: FlatButton(onPressed: _handleSignIn(),),
-                ),
-                 Container(
-                   height:100.0,
-                 width:50.0,
-                 child: FlatButton(onPressed: _handleSignOut(),),
-                )
-              ]
-
-          ),
-
-        ),
-
-      );
-    }
-
-
+      ),
+    );
   }
 
   _handleSignIn() {
     _loginUser();
   }
+
   _handleSignOut() {
+    if(FirebaseApi.signOutGoogle()){
+      print("user sign out!!");
+    }
   }
 }
